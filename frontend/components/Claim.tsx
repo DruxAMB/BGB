@@ -64,6 +64,7 @@ const Claim = () => {
       setError(
         error instanceof Error ? error.message : "Failed to claim package"
       );
+      console.log(error)
     } finally {
       setIsClaiming(false);
     }

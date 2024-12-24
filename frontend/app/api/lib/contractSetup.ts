@@ -38,13 +38,13 @@ export class BGBContract {
 
   /**
    * Executes the claim function on the smart contract
-   * @param accountId - The account identifier of the claimer
+   * @param address - The account identifier of the claimer
    * @param packageId - The identifier of the package to be claimed
    * @returns A promise that resolves with the transaction response
    */
-  claim(accountId: string, packageId: string) {
+  claim(address: string, packageId: string) {
     // Prepare arguments for the contract function
-    const args: string[] = [accountId, packageId];
+    const args: string[] = [address, packageId];
     // Execute the claim transaction
     return this.writeClient.write.claim(args);
   }
