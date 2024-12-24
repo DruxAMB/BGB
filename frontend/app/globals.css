@@ -4,8 +4,14 @@
 
 body {
   font-family: Arial, Helvetica, sans-serif;
+  min-height: 100vh;
 }
-
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  /* overflow: hidden; */
+}
 @layer utilities {
   .text-balance {
     text-wrap: balance;
@@ -18,5 +24,30 @@ body {
 
 .music-control:hover {
   transform: scale(1.1);
+}
 
+
+.share-link-page {
+  min-height: calc(100vh - 80px);
+}
+.share-link-container {
+  padding: 2rem;
+  background: rgba(0, 0, 0, 0.106);
+  border: 1px solid rgba(255, 255, 255, 0.21);
+  border-radius: 12px;
+}
+
+.share-link-box {
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  background: rgba(255, 255, 255, 0.05);
+  height: 46px;
+  border-radius: 100px;
+  padding: 0 18px;
+}
+
+.share-via-sm-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-size: ;
 }

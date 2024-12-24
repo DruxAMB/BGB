@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
-
 interface SoundOptions {
   volume?: number;
   loop?: boolean;
