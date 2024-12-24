@@ -17,60 +17,60 @@ const ShareLink = () => {
   const [isLoaded, setIsLoaded] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
 
-useEffect(() => {
-  const createTestPackage = async () => {
-    try {
-      const response = await fetch('/api/saved-package', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ packageId: 'test-package-123' }),
-      });
-
-      if (!response.ok) {
-        throw new Error('Failed to create test package');
-      }
-
-      const data = await response.json();
-      setPackageId(data.savedPackageId);
-    } catch (error) {
-      setError(
-        error instanceof Error
-          ? error.message
-          : 'Failed to create test package',
-      );
-    }
-  };
-
-  if (process.env.NODE_ENV === 'development') {
-    createTestPackage();
-  } else {
-    // Original fetchPackage logic
-    const fetchPackage = async () => {
+  useEffect(() => {
+    const createTestPackage = async () => {
       try {
-        setIsLoaded(true);
-        const savePackageId = params.id;
-        const response = await fetch(`/api/saved-package/${savePackageId}`);
+        const response = await fetch('/api/saved-package', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ packageId: 'test-package-123' }),
+        });
 
         if (!response.ok) {
-          throw new Error('Package not found');
+          throw new Error('Failed to create test package');
         }
 
         const data = await response.json();
-        setPackageId(data.packageId);
+        setPackageId(data.savedPackageId);
       } catch (error) {
         setError(
-          error instanceof Error ? error.message : 'Failed to fetch package',
+          error instanceof Error
+            ? error.message
+            : 'Failed to create test package',
         );
-      } finally {
-        setIsLoaded(false);
       }
     };
 
-    if (params.id) {
-      fetchPackage();
+    if (process.env.NODE_ENV === 'development') {
+      createTestPackage();
+    } else {
+      // Original fetchPackage logic
+      const fetchPackage = async () => {
+        try {
+          setIsLoaded(true);
+          const savePackageId = params.id;
+          const response = await fetch(`/api/saved-package/${savePackageId}`);
+
+          if (!response.ok) {
+            throw new Error('Package not found');
+          }
+
+          const data = await response.json();
+          setPackageId(data.packageId);
+        } catch (error) {
+          setError(
+            error instanceof Error ? error.message : 'Failed to fetch package',
+          );
+        } finally {
+          setIsLoaded(false);
+        }
+      };
+
+      if (params.id) {
+        fetchPackage();
+      }
     }
-  }
-}, [params.id]);
+  }, [params.id]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -83,12 +83,14 @@ useEffect(() => {
       { threshold: 0.25 },
     );
 
-    if (videoRef.current) {
-      observer.observe(videoRef.current);
+    const videoElement = videoRef.current;
+
+    if (videoElement) {
+      observer.observe(videoElement);
     }
 
     return () => {
-      if (videoRef.current) {
+      if (videoElement) {
         observer.disconnect();
       }
     };
@@ -206,11 +208,12 @@ useEffect(() => {
 
         <button className="flex items-center justify-center w-full mt-14 gap-4 p-2 bg-[#2455FF] rounded-full">
           Send another Gift{' '}
-          <img
+          <Image
             src="/gift.gif"
             alt="Descriptive text for the GIF"
+            width={24}
+            height={24}
             loading="lazy"
-            className="w-8"
           />
         </button>
       </div>

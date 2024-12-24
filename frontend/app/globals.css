@@ -28,7 +28,7 @@ body {
 
 
 .share-link-page {
-  min-height: calc(100vh - 80px);
+  min-height: calc(100vh - 0px);
 }
 .share-link-container {
   padding: 2rem;
@@ -49,5 +49,5 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-size: ;
+
 }
